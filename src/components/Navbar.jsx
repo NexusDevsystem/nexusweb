@@ -37,9 +37,9 @@ export default function Navbar() {
         {/* logo */}
         <Link to="home" smooth duration={500}>
           <img
-              src="/nexuslogo.png"
-              alt="Nexus Devsystem"
-              className="h-8 md:h-10 cursor-pointer"
+            src="/nexuslogo.png"
+            alt="Nexus Devsystem"
+            className="h-12 md:h-16 lg:h-20 w-auto cursor-pointer"
           />
         </Link>
 
