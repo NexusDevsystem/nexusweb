@@ -23,7 +23,6 @@ export default function Contact() {
         },
         body: JSON.stringify({ name, email, company, message })
       })
-
       const body = await res.json()
       if (!res.ok) throw new Error(body.error || 'Erro desconhecido')
 
@@ -41,6 +40,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
+        {/* Título da seção */}
         <AnimateOnScroll>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-primary inline-block relative group">
@@ -57,10 +57,12 @@ export default function Contact() {
         </AnimateOnScroll>
 
         <div className="grid gap-12 md:grid-cols-2">
+          {/* --- Formulário --- */}
           <AnimateOnScroll from="left">
             <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-8">
               <h3 className="text-xl font-bold text-primary mb-6">Envie sua mensagem</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Nome */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Nome completo
@@ -77,6 +79,8 @@ export default function Contact() {
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                   />
                 </div>
+
+                {/* Email */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Email
@@ -93,6 +97,8 @@ export default function Contact() {
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                   />
                 </div>
+
+                {/* Empresa */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Empresa
@@ -108,6 +114,8 @@ export default function Contact() {
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                   />
                 </div>
+
+                {/* Mensagem */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Mensagem
@@ -125,6 +133,7 @@ export default function Contact() {
                   />
                 </div>
 
+                {/* Botão */}
                 <button
                   type="submit"
                   disabled={status === 'sending'}
@@ -137,6 +146,7 @@ export default function Contact() {
                     ? 'Enviado ✅'
                     : 'Enviar Mensagem'}
                 </button>
+
                 {status === 'error' && (
                   <p className="text-red-600 mt-2">Erro ao enviar. Tente novamente.</p>
                 )}
@@ -144,8 +154,40 @@ export default function Contact() {
             </div>
           </AnimateOnScroll>
 
+          {/* --- Card “Por que escolher” --- */}
           <AnimateOnScroll from="right" delay={0.2}>
-            {/* seus cards laterais aqui */}
+            <div className="bg-secondary text-white rounded-2xl shadow-lg p-8 transition-transform hover:-translate-y-2">
+              <h3 className="text-xl font-bold mb-6">Por que escolher a Nexus Devsystem?</h3>
+              <ul className="space-y-5 text-left">
+                <li className="flex items-start">
+                  <ShieldCheck className="w-6 h-6 flex-shrink-0 mr-4" />
+                  <div>
+                    <p className="font-semibold">Soluções Personalizadas</p>
+                    <p className="text-sm text-white/80">
+                      Desenvolvemos sistemas sob medida para as necessidades específicas do seu negócio.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <Zap className="w-6 h-6 flex-shrink-0 mr-4" />
+                  <div>
+                    <p className="font-semibold">Tecnologia de Ponta</p>
+                    <p className="text-sm text-white/80">
+                      Utilizamos as mais recentes tecnologias para garantir soluções modernas e eficientes.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <MessageCircle className="w-6 h-6 flex-shrink-0 mr-4" />
+                  <div>
+                    <p className="font-semibold">Suporte Contínuo</p>
+                    <p className="text-sm text-white/80">
+                      Oferecemos acompanhamento e suporte para garantir o funcionamento ideal dos seus sistemas.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </AnimateOnScroll>
         </div>
       </div>
