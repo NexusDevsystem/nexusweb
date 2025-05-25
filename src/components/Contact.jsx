@@ -1,6 +1,6 @@
 // src/components/Contact.jsx
-import React, { useState, useEffect } from 'react'
-import { ShieldCheck, Zap, MessageCircle, X } from 'lucide-react'
+import React, { useState } from 'react'
+import { ShieldCheck, Zap, MessageCircle } from 'lucide-react'
 import AnimateOnScroll from './AnimateOnScroll'
 
 export default function Contact() {
@@ -8,14 +8,7 @@ export default function Contact() {
   const [email, setEmail] = useState('')
   const [company, setCompany] = useState('')
   const [message, setMessage] = useState('')
-  const [status, setStatus] = useState(null)      // null | 'sending' | 'success' | 'error'
-  const [showModal, setShowModal] = useState(false)
-
-  useEffect(() => {
-    if (status === 'success') {
-      setShowModal(true)
-    }
-  }, [status])
+  const [status, setStatus] = useState(null) // 'sending' | 'success' | 'error'
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -39,7 +32,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-20 bg-gray-50 relative">
+    <section id="contact" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         <AnimateOnScroll>
           <div className="text-center mb-12">
@@ -57,17 +50,18 @@ export default function Contact() {
         </AnimateOnScroll>
 
         <div className="grid gap-12 md:grid-cols-2">
+          {/* Formulário */}
           <AnimateOnScroll from="left">
             <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-8">
               <h3 className="text-xl font-bold text-primary mb-6">Envie sua mensagem</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Nome */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Nome completo
                   </label>
                   <input
                     type="text"
-                    name="name"
                     value={name}
                     onChange={e => setName(e.target.value)}
                     placeholder="Seu nome"
@@ -77,11 +71,14 @@ export default function Contact() {
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                   />
                 </div>
+
+                {/* Email */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Email
+                  </label>
                   <input
                     type="email"
-                    name="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder="seu.email@exemplo.com"
@@ -91,11 +88,14 @@ export default function Contact() {
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                   />
                 </div>
+
+                {/* Empresa */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Empresa</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Empresa
+                  </label>
                   <input
                     type="text"
-                    name="company"
                     value={company}
                     onChange={e => setCompany(e.target.value)}
                     placeholder="Nome da sua empresa"
@@ -104,20 +104,25 @@ export default function Contact() {
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                   />
                 </div>
+
+                {/* Mensagem */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Mensagem</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Mensagem
+                  </label>
                   <textarea
-                    name="message"
                     rows={5}
                     value={message}
                     onChange={e => setMessage(e.target.value)}
-                    placeholder="Como podemos ajudar?"
+                    placeholder="Descreva como podemos ajudar sua empresa"
                     required
                     className="w-full bg-gray-100 border border-gray-300 rounded-lg px-4 py-2
                                text-gray-900 placeholder-gray-500
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition resize-none"
                   />
                 </div>
+
+                {/* Botão e status */}
                 <button
                   type="submit"
                   disabled={status === 'sending'}
@@ -130,6 +135,7 @@ export default function Contact() {
                     ? 'Enviado ✅'
                     : 'Enviar Mensagem'}
                 </button>
+
                 {status === 'error' && (
                   <p className="text-red-600 mt-2">Erro ao enviar. Tente novamente.</p>
                 )}
@@ -137,6 +143,7 @@ export default function Contact() {
             </div>
           </AnimateOnScroll>
 
+          {/* Card lateral */}
           <AnimateOnScroll from="right" delay={0.2}>
             <div className="bg-secondary text-white rounded-2xl shadow-lg p-8 transition-transform hover:-translate-y-2">
               <h3 className="text-xl font-bold mb-6">Por que escolher a Nexus Devsystem?</h3>
@@ -167,51 +174,6 @@ export default function Contact() {
           </AnimateOnScroll>
         </div>
       </div>
-
-      {/* ——— POPUP SLIDE-IN ——— */}
-      {showModal && (
-        <div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-          onClick={() => setShowModal(false)}
-        >
-          <div
-            className="bg-white rounded-lg p-8 max-w-sm mx-4 text-center relative modal-content"
-            onClick={e => e.stopPropagation()}
-          >
-            <button
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
-              onClick={() => setShowModal(false)}
-            >
-              <X />
-            </button>
-            <h4 className="text-xl font-bold mb-4">Mensagem enviada!</h4>
-            <p className="mb-6">Obrigado pelo seu contato. Em breve retornaremos.</p>
-            <button
-              onClick={() => setShowModal(false)}
-              className="mt-2 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
-            >
-              Fechar
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* ——— ESTILOS DO SLIDE-IN ——— */}
-      <style jsx>{`
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateX(100%);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        .modal-content {
-          animation: slideIn 0.4s ease-out forwards;
-        }
-      `}</style>
     </section>
   )
 }
