@@ -55,10 +55,14 @@ export default function Contact() {
 
         <div className="grid gap-12 md:grid-cols-2">
           {/* --- Formulário --- */}
-          <AnimateOnScroll from="left">
+         <AnimateOnScroll from="left">
             <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-8">
               <h3 className="text-xl font-bold text-primary mb-6">Envie sua mensagem</h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form
+                action="https://formspree.io/f/mblovknq"
+                method="POST"
+                className="space-y-6"
+              >
                 {/* Nome */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
