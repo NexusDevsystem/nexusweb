@@ -15,11 +15,15 @@ export default function Contact() {
     setStatus('sending')
 
     try {
-      const res = await fetch('http://localhost:3333/api/contact', {
+      const res = await fetch('https://formspree.io/f/mblovknq', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({ name, email, company, message })
       })
+
       const body = await res.json()
       if (!res.ok) throw new Error(body.error || 'Erro desconhecido')
 
@@ -37,7 +41,6 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Título da seção */}
         <AnimateOnScroll>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-primary inline-block relative group">
@@ -54,22 +57,17 @@ export default function Contact() {
         </AnimateOnScroll>
 
         <div className="grid gap-12 md:grid-cols-2">
-          {/* --- Formulário --- */}
-         <AnimateOnScroll from="left">
+          <AnimateOnScroll from="left">
             <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-8">
               <h3 className="text-xl font-bold text-primary mb-6">Envie sua mensagem</h3>
-              <form
-                action="https://formspree.io/f/mblovknq"
-                method="POST"
-                className="space-y-6"
-              >
-                {/* Nome */}
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Nome completo
                   </label>
                   <input
                     type="text"
+                    name="name"
                     value={name}
                     onChange={e => setName(e.target.value)}
                     placeholder="Seu nome"
@@ -79,14 +77,13 @@ export default function Contact() {
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                   />
                 </div>
-
-                {/* Email */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Email
                   </label>
                   <input
                     type="email"
+                    name="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder="seu.email@exemplo.com"
@@ -96,14 +93,13 @@ export default function Contact() {
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                   />
                 </div>
-
-                {/* Empresa */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Empresa
                   </label>
                   <input
                     type="text"
+                    name="company"
                     value={company}
                     onChange={e => setCompany(e.target.value)}
                     placeholder="Nome da sua empresa"
@@ -112,13 +108,12 @@ export default function Contact() {
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                   />
                 </div>
-
-                {/* Mensagem */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Mensagem
                   </label>
                   <textarea
+                    name="message"
                     rows={5}
                     value={message}
                     onChange={e => setMessage(e.target.value)}
@@ -130,7 +125,6 @@ export default function Contact() {
                   />
                 </div>
 
-                {/* Botão */}
                 <button
                   type="submit"
                   disabled={status === 'sending'}
@@ -143,7 +137,6 @@ export default function Contact() {
                     ? 'Enviado ✅'
                     : 'Enviar Mensagem'}
                 </button>
-
                 {status === 'error' && (
                   <p className="text-red-600 mt-2">Erro ao enviar. Tente novamente.</p>
                 )}
@@ -151,57 +144,8 @@ export default function Contact() {
             </div>
           </AnimateOnScroll>
 
-          {/* --- Cards laterais --- */}
           <AnimateOnScroll from="right" delay={0.2}>
-            <div className="space-y-8">
-              {/* Por que escolher */}
-              <div className="bg-secondary text-white rounded-2xl shadow-lg p-8 transition-transform hover:-translate-y-2">
-                <h3 className="text-xl font-bold mb-6">Por que escolher a Nexus Devsystem?</h3>
-                <ul className="space-y-5 text-left">
-                  <li className="flex items-start">
-                    <ShieldCheck className="w-6 h-6 flex-shrink-0 mr-4" />
-                    <div>
-                      <p className="font-semibold">Soluções Personalizadas</p>
-                      <p className="text-sm text-white/80">
-                        Desenvolvemos sistemas sob medida para as necessidades específicas do seu negócio.
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start">
-                    <Zap className="w-6 h-6 flex-shrink-0 mr-4" />
-                    <div>
-                      <p className="font-semibold">Tecnologia de Ponta</p>
-                      <p className="text-sm text-white/80">
-                        Utilizamos as mais recentes tecnologias para garantir soluções modernas e eficientes.
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start">
-                    <MessageCircle className="w-6 h-6 flex-shrink-0 mr-4" />
-                    <div>
-                      <p className="font-semibold">Suporte Contínuo</p>
-                      <p className="text-sm text-white/80">
-                        Oferecemos acompanhamento e suporte para garantir o funcionamento ideal dos seus sistemas.
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Agendar demonstração */}
-              <div className="bg-blue-50 rounded-2xl shadow-lg p-8 transition-transform hover:-translate-y-2">
-                <h3 className="text-xl font-bold text-primary mb-4">Agende uma Demonstração</h3>
-                <p className="text-gray-700 mb-6 text-left">
-                  Quer ver nossas soluções em ação? Agende uma demonstração personalizada para conhecer como podemos ajudar sua empresa.
-                </p>
-                <button
-                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold
-                             py-3 rounded-lg shadow-lg transition-transform hover:-translate-y-1"
-                >
-                  Solicitar Demonstração
-                </button>
-              </div>
-            </div>
+            {/* seus cards laterais aqui */}
           </AnimateOnScroll>
         </div>
       </div>
