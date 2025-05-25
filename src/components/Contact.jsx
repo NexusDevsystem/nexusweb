@@ -8,10 +8,9 @@ export default function Contact() {
   const [email, setEmail] = useState('')
   const [company, setCompany] = useState('')
   const [message, setMessage] = useState('')
-  const [status, setStatus] = useState(null) // null | 'sending' | 'success' | 'error'
+  const [status, setStatus] = useState(null)      // null | 'sending' | 'success' | 'error'
   const [showModal, setShowModal] = useState(false)
 
-  // Sempre que o envio for sucesso, abrir o modal
   useEffect(() => {
     if (status === 'success') {
       setShowModal(true)
@@ -25,21 +24,14 @@ export default function Contact() {
     try {
       const res = await fetch('https://formspree.io/f/mblovknq', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ name, email, company, message })
       })
       const body = await res.json()
       if (!res.ok) throw new Error(body.error || 'Erro desconhecido')
 
       setStatus('success')
-      // limpar campos se quiser
-      setName('')
-      setEmail('')
-      setCompany('')
-      setMessage('')
+      setName(''); setEmail(''); setCompany(''); setMessage('')
     } catch (err) {
       console.error(err)
       setStatus('error')
@@ -49,7 +41,6 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20 bg-gray-50 relative">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Título */}
         <AnimateOnScroll>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-primary inline-block relative group">
@@ -66,12 +57,10 @@ export default function Contact() {
         </AnimateOnScroll>
 
         <div className="grid gap-12 md:grid-cols-2">
-          {/* Formulário */}
           <AnimateOnScroll from="left">
             <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-8">
               <h3 className="text-xl font-bold text-primary mb-6">Envie sua mensagem</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Nome */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Nome completo
@@ -88,12 +77,8 @@ export default function Contact() {
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                   />
                 </div>
-
-                {/* Email */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Email
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                   <input
                     type="email"
                     name="email"
@@ -106,12 +91,8 @@ export default function Contact() {
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                   />
                 </div>
-
-                {/* Empresa */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Empresa
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Empresa</label>
                   <input
                     type="text"
                     name="company"
@@ -123,26 +104,20 @@ export default function Contact() {
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                   />
                 </div>
-
-                {/* Mensagem */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Mensagem
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Mensagem</label>
                   <textarea
                     name="message"
                     rows={5}
                     value={message}
                     onChange={e => setMessage(e.target.value)}
-                    placeholder="Descreva como podemos ajudar sua empresa"
+                    placeholder="Como podemos ajudar?"
                     required
                     className="w-full bg-gray-100 border border-gray-300 rounded-lg px-4 py-2
                                text-gray-900 placeholder-gray-500
                                focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition resize-none"
                   />
                 </div>
-
-                {/* Botão */}
                 <button
                   type="submit"
                   disabled={status === 'sending'}
@@ -162,7 +137,6 @@ export default function Contact() {
             </div>
           </AnimateOnScroll>
 
-          {/* Card lateral */}
           <AnimateOnScroll from="right" delay={0.2}>
             <div className="bg-secondary text-white rounded-2xl shadow-lg p-8 transition-transform hover:-translate-y-2">
               <h3 className="text-xl font-bold mb-6">Por que escolher a Nexus Devsystem?</h3>
@@ -171,27 +145,21 @@ export default function Contact() {
                   <ShieldCheck className="w-6 h-6 flex-shrink-0 mr-4" />
                   <div>
                     <p className="font-semibold">Soluções Personalizadas</p>
-                    <p className="text-sm text-white/80">
-                      Sistemas sob medida para seu negócio.
-                    </p>
+                    <p className="text-sm text-white/80">Sistemas sob medida para seu negócio.</p>
                   </div>
                 </li>
                 <li className="flex items-start">
                   <Zap className="w-6 h-6 flex-shrink-0 mr-4" />
                   <div>
                     <p className="font-semibold">Tecnologia de Ponta</p>
-                    <p className="text-sm text-white/80">
-                      Soluções modernas e eficientes.
-                    </p>
+                    <p className="text-sm text-white/80">Soluções modernas e eficientes.</p>
                   </div>
                 </li>
                 <li className="flex items-start">
                   <MessageCircle className="w-6 h-6 flex-shrink-0 mr-4" />
                   <div>
                     <p className="font-semibold">Suporte Contínuo</p>
-                    <p className="text-sm text-white/80">
-                      Acompanhamento ideal dos seus sistemas.
-                    </p>
+                    <p className="text-sm text-white/80">Acompanhamento ideal dos seus sistemas.</p>
                   </div>
                 </li>
               </ul>
@@ -200,14 +168,14 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* ——— POPUP DE CONFIRMAÇÃO ——— */}
+      {/* ——— POPUP SLIDE-IN ——— */}
       {showModal && (
         <div
           className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
           onClick={() => setShowModal(false)}
         >
           <div
-            className="bg-white rounded-lg p-8 max-w-sm mx-4 text-center relative"
+            className="bg-white rounded-lg p-8 max-w-sm mx-4 text-center relative modal-content"
             onClick={e => e.stopPropagation()}
           >
             <button
@@ -227,6 +195,23 @@ export default function Contact() {
           </div>
         </div>
       )}
+
+      {/* ——— ESTILOS DO SLIDE-IN ——— */}
+      <style jsx>{`
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateX(100%);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        .modal-content {
+          animation: slideIn 0.4s ease-out forwards;
+        }
+      `}</style>
     </section>
   )
 }
