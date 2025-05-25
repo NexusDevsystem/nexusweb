@@ -1,6 +1,6 @@
 // src/components/Contact.jsx
-import React, { useState } from 'react'
-import { ShieldCheck, Zap, MessageCircle } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { ShieldCheck, Zap, MessageCircle, X } from 'lucide-react'
 import AnimateOnScroll from './AnimateOnScroll'
 
 export default function Contact() {
@@ -9,6 +9,14 @@ export default function Contact() {
   const [company, setCompany] = useState('')
   const [message, setMessage] = useState('')
   const [status, setStatus] = useState(null) // null | 'sending' | 'success' | 'error'
+  const [showModal, setShowModal] = useState(false)
+
+  // Sempre que o envio for sucesso, abrir o modal
+  useEffect(() => {
+    if (status === 'success') {
+      setShowModal(true)
+    }
+  }, [status])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -27,6 +35,7 @@ export default function Contact() {
       if (!res.ok) throw new Error(body.error || 'Erro desconhecido')
 
       setStatus('success')
+      // limpar campos se quiser
       setName('')
       setEmail('')
       setCompany('')
@@ -38,9 +47,9 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
+    <section id="contact" className="py-20 bg-gray-50 relative">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Título da seção */}
+        {/* Título */}
         <AnimateOnScroll>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-primary inline-block relative group">
@@ -57,7 +66,7 @@ export default function Contact() {
         </AnimateOnScroll>
 
         <div className="grid gap-12 md:grid-cols-2">
-          {/* --- Formulário --- */}
+          {/* Formulário */}
           <AnimateOnScroll from="left">
             <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-8">
               <h3 className="text-xl font-bold text-primary mb-6">Envie sua mensagem</h3>
@@ -146,7 +155,6 @@ export default function Contact() {
                     ? 'Enviado ✅'
                     : 'Enviar Mensagem'}
                 </button>
-
                 {status === 'error' && (
                   <p className="text-red-600 mt-2">Erro ao enviar. Tente novamente.</p>
                 )}
@@ -154,7 +162,7 @@ export default function Contact() {
             </div>
           </AnimateOnScroll>
 
-          {/* --- Card “Por que escolher” --- */}
+          {/* Card lateral */}
           <AnimateOnScroll from="right" delay={0.2}>
             <div className="bg-secondary text-white rounded-2xl shadow-lg p-8 transition-transform hover:-translate-y-2">
               <h3 className="text-xl font-bold mb-6">Por que escolher a Nexus Devsystem?</h3>
@@ -164,7 +172,7 @@ export default function Contact() {
                   <div>
                     <p className="font-semibold">Soluções Personalizadas</p>
                     <p className="text-sm text-white/80">
-                      Desenvolvemos sistemas sob medida para as necessidades específicas do seu negócio.
+                      Sistemas sob medida para seu negócio.
                     </p>
                   </div>
                 </li>
@@ -173,7 +181,7 @@ export default function Contact() {
                   <div>
                     <p className="font-semibold">Tecnologia de Ponta</p>
                     <p className="text-sm text-white/80">
-                      Utilizamos as mais recentes tecnologias para garantir soluções modernas e eficientes.
+                      Soluções modernas e eficientes.
                     </p>
                   </div>
                 </li>
@@ -182,7 +190,7 @@ export default function Contact() {
                   <div>
                     <p className="font-semibold">Suporte Contínuo</p>
                     <p className="text-sm text-white/80">
-                      Oferecemos acompanhamento e suporte para garantir o funcionamento ideal dos seus sistemas.
+                      Acompanhamento ideal dos seus sistemas.
                     </p>
                   </div>
                 </li>
@@ -191,6 +199,34 @@ export default function Contact() {
           </AnimateOnScroll>
         </div>
       </div>
+
+      {/* ——— POPUP DE CONFIRMAÇÃO ——— */}
+      {showModal && (
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="bg-white rounded-lg p-8 max-w-sm mx-4 text-center relative"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+              onClick={() => setShowModal(false)}
+            >
+              <X />
+            </button>
+            <h4 className="text-xl font-bold mb-4">Mensagem enviada!</h4>
+            <p className="mb-6">Obrigado pelo seu contato. Em breve retornaremos.</p>
+            <button
+              onClick={() => setShowModal(false)}
+              className="mt-2 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
