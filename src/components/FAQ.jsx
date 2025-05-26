@@ -14,9 +14,9 @@ const faqs = [
       'Aplicamos criptografia ponta-a-ponta, testes contínuos de vulnerabilidade, controles de acesso granulares e auditorias regulares. Tudo em conformidade com ISO/IEC 27001 e LGPD, para você dormir tranquilo.'
   },
   {
-    question: 'Qual é o processo de desenvolvimento adotado?',
+    question: 'Qual processo de desenvolvimento vocês seguem?',
     answer:
-      'Utilizamos Scrum/Kanban em sprints curtos, com entregas incrementais e feedback constante. Isso nos dá flexibilidade para ajustar prioridades em tempo real e acelerar seu time-to-market.'
+      'Adotamos metodologias ágeis (Scrum/Kanban), com entregas incrementais, feedback constante e revisões em cada sprint. Isso nos dá agilidade para ajustar prioridades e acelerar seu time-to-market.'
   },
   {
     question: 'Como funciona o suporte pós-implementação?',
@@ -34,36 +34,34 @@ export default function FAQ() {
     <section
       id="faq"
       className="
-        relative overflow-hidden
+        relative py-20
         bg-cta-pattern bg-cover bg-center
-        py-20
       "
     >
       {/* blobs animados */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-accent/20 rounded-full filter blur-3xl animate-pulseSlow pointer-events-none" />
-      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-accent/10 rounded-full filter blur-2xl animate-pulseVerySlow pointer-events-none" />
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-accent/20 rounded-full filter blur-3xl animate-pulseSlow pointer-events-none"/>
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-accent/10 rounded-full filter blur-2xl animate-pulseVerySlow pointer-events-none"/>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
         <h2 className="text-4xl sm:text-5xl font-bold text-accent mb-12 animate-fadeIn">
           Perguntas Frequentes
         </h2>
 
-        {/* wrapper do slider com overflow-x-hidden */}
-        <div className="relative overflow-x-hidden">
+        {/* SLIDER WRAPPER: esconde tudo que passar das bordas */}
+        <div className="relative overflow-hidden rounded-2xl">
           <div
             className="flex transition-transform duration-700 ease-in-out"
             style={{ transform: `translateX(-${current * 100}%)` }}
           >
             {faqs.map(({ question, answer }, idx) => (
-              <div
-                key={idx}
-                className="flex-shrink-0 w-full px-0 sm:px-4"
-              >
-                <div className="
+              <div key={idx} className="flex-shrink-0 w-full px-0 sm:px-4">
+                <div
+                  className="
                     bg-secondary/30 backdrop-blur-md
                     p-8 rounded-2xl shadow-2xl border border-accent/20
                     transition-transform duration-300 ease-in-out hover:scale-105
-                  ">
+                  "
+                >
                   <h3 className="text-2xl font-semibold text-accent mb-4">
                     {question}
                   </h3>
@@ -80,10 +78,8 @@ export default function FAQ() {
             onClick={prev}
             aria-label="Anterior"
             className="
-              absolute left-0 top-1/2 -translate-y-1/2
-              bg-secondary/50 hover:bg-secondary
-              text-white p-2 rounded-full
-              transition
+              absolute left-2 top-1/2 -translate-y-1/2
+              bg-secondary/50 hover:bg-secondary text-white p-2 rounded-full transition
             "
           >
             <ChevronLeft className="w-5 h-5" />
@@ -92,17 +88,15 @@ export default function FAQ() {
             onClick={next}
             aria-label="Próximo"
             className="
-              absolute right-0 top-1/2 -translate-y-1/2
-              bg-secondary/50 hover:bg-secondary
-              text-white p-2 rounded-full
-              transition
+              absolute right-2 top-1/2 -translate-y-1/2
+              bg-secondary/50 hover:bg-secondary text-white p-2 rounded-full transition
             "
           >
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
 
-        {/* indicadores */}
+        {/* bullets */}
         <div className="flex justify-center mt-8 space-x-2">
           {faqs.map((_, idx) => (
             <button
