@@ -8,6 +8,7 @@ import Services from './components/Services'
 import SuccessCases from './components/SuccessCases'
 import Technologies from './components/Technologies'
 import Contact from './components/Contact'
+import FAQ from './components/FAQ'
 import Footer from './components/Footer'   // 📌 importe o Footer
 
 
