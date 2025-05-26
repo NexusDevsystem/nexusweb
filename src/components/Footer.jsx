@@ -36,7 +36,7 @@ export default function Footer() {
           <h4 className="font-semibold text-lg mb-2">Redes sociais</h4>
           <div className="flex justify-center md:justify-end space-x-4">
             <a
-              href="https://instagram.com/seu_perfil"
+              href="https://instagram.com/nexus.devsystem"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-secondary transition"
