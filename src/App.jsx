@@ -22,10 +22,7 @@ export default function App() {
       <Services />
       <SuccessCases />
       <Technologies />
-
-      {/* <-- aqui entra o seu FAQ */}
       <FAQ />
-
       <Contact />
       <Footer />
     </div>
