@@ -11,17 +11,14 @@ export default function Navbar() {
     { to: 'home',    label: 'Home' },
     { to: 'about',   label: 'Sobre Nós' },
     { to: 'services',label: 'Serviços' },
-    { to: 'cases',   label: 'Casos de Sucesso' },
     { to: 'tech',    label: 'Tecnologias' },
-    { to: 'FAQ', label: 'FAQ' },
+    { to: 'cases',   label: 'Casos de Sucesso' },
+    { to: 'faq',     label: 'FAQ' },             // ← nova entrada
     { to: 'contact', label: 'Contato' }
   ]
 
-  // Adiciona sombra quando scroll > 0
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 0)
-    }
+    const onScroll = () => setScrolled(window.scrollY > 0)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -30,17 +27,16 @@ export default function Navbar() {
     <nav
       className={`
         fixed top-0 w-full z-50 transition-shadow
-        bg-primary/30 backdrop-blur-md
-        ${scrolled ? 'shadow-md' : ''}
+        ${scrolled ? 'backdrop-blur-md bg-primary/80 shadow-md' : 'bg-primary/60'}
       `}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
         {/* logo */}
-        <Link to="home" smooth duration={500}>
+        <Link to="home" smooth duration={500} className="cursor-pointer">
           <img
             src="/nexuslogo.png"
             alt="Nexus Devsystem"
-            className="h-12 md:h-16 lg:h-20 w-auto cursor-pointer"
+            className="h-10 md:h-12"
           />
         </Link>
 
@@ -50,8 +46,8 @@ export default function Navbar() {
             <li key={to}>
               <Link
                 to={to}
-                spy={true}
-                smooth={true}
+                spy
+                smooth
                 offset={-80}
                 duration={500}
                 className="cursor-pointer px-2 py-1 text-white hover:text-secondary transition"
@@ -65,23 +61,21 @@ export default function Navbar() {
 
         {/* botão hamburguer mobile */}
         <button
-          className="md:hidden p-2 rounded hover:bg-primary/50 transition"
-          onClick={() => setOpen(!open)}
-          aria-label="Abrir menu"
+          className="md:hidden p-2 rounded hover:bg-primary/30 transition"
+          onClick={() => setOpen(o => !o)}
         >
-          {open 
-            ? <X className="w-6 h-6 text-white" /> 
-            : <Menu className="w-6 h-6 text-white" />}
+          {open
+            ? <X className="w-6 h-6 text-white" />
+            : <Menu className="w-6 h-6 text-white" />
+          }
         </button>
       </div>
 
       {/* menu móvel */}
       <div
         className={`
-          md:hidden
-          bg-primary/30 backdrop-blur-md
-          transition-[max-height] duration-300 overflow-hidden
-          ${open ? 'max-h-60' : 'max-h-0'}
+          md:hidden bg-primary transition-max-height duration-300 overflow-hidden
+          ${open ? 'max-h-72' : 'max-h-0'}
         `}
       >
         <ul className="flex flex-col px-4 pb-4 space-y-2">
@@ -89,8 +83,8 @@ export default function Navbar() {
             <li key={to}>
               <Link
                 to={to}
-                spy={true}
-                smooth={true}
+                spy
+                smooth
                 offset={-80}
                 duration={500}
                 className="block py-2 text-white hover:text-secondary transition"
