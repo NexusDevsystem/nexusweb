@@ -47,7 +47,7 @@ export default function FAQ() {
           Perguntas Frequentes
         </h2>
 
-        {/* Slider wrapper sem bordas */}
+        {/* slider “cortado” em container sem sombra */}
         <div className="relative overflow-hidden rounded-2xl">
           <div
             className="flex transition-transform duration-700 ease-in-out"
@@ -58,7 +58,7 @@ export default function FAQ() {
                 <div
                   className="
                     bg-secondary/30 backdrop-blur-md
-                    p-8 rounded-2xl shadow-2xl
+                    p-8 rounded-2xl
                     transform hover:scale-105
                     transition duration-300
                   "
@@ -80,7 +80,8 @@ export default function FAQ() {
             aria-label="Anterior"
             className="
               absolute left-2 top-1/2 -translate-y-1/2
-              bg-secondary/50 hover:bg-secondary text-white p-2 rounded-full transition
+              bg-secondary/50 hover:bg-secondary text-white
+              p-2 rounded-full transition
             "
           >
             <ChevronLeft className="w-5 h-5" />
@@ -90,7 +91,8 @@ export default function FAQ() {
             aria-label="Próximo"
             className="
               absolute right-2 top-1/2 -translate-y-1/2
-              bg-secondary/50 hover:bg-secondary text-white p-2 rounded-full transition
+              bg-secondary/50 hover:bg-secondary text-white
+              p-2 rounded-full transition
             "
           >
             <ChevronRight className="w-5 h-5" />
