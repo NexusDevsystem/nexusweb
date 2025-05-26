@@ -13,7 +13,7 @@ import Footer from './components/Footer'
 
 export default function App() {
   return (
-    <div className="font-sans antialiased bg-white text-gray-900">
+    <div className="font-sans antialiased bg-white text-gray-900 overflow-x-hidden">
       <ScrollProgress />
 
       <Navbar />
