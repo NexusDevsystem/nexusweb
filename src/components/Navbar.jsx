@@ -32,11 +32,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
         {/* logo */}
         <Link to="home" smooth duration={500} className="cursor-pointer">
-          <img
-            src="/nexuslogo.png"
-            alt="Nexus Devsystem"
-            className="h-10 md:h-12"
-          />
+          <img src="/nexuslogo.png" alt="Nexus Devsystem" className="h-10 md:h-12" />
         </Link>
 
         {/* desktop links */}
@@ -63,23 +59,16 @@ export default function Navbar() {
           className="md:hidden flex flex-col items-center justify-center w-10 h-10 relative focus:outline-none"
           onClick={() => setOpen(o => !o)}
         >
-          {/* duas linhas */}
           <span
             className={`
               block absolute h-0.5 w-6 bg-white transition-transform duration-300
-              ${open 
-                ? 'rotate-45' 
-                : '-translate-y-1.5'
-              }
+              ${open ? 'rotate-45' : '-translate-y-1.5'}
             `}
           />
           <span
             className={`
               block absolute h-0.5 w-6 bg-white transition-transform duration-300
-              ${open 
-                ? '-rotate-45' 
-                : 'translate-y-1.5'
-              }
+              ${open ? '-rotate-45' : 'translate-y-1.5'}
             `}
           />
         </button>
@@ -88,7 +77,9 @@ export default function Navbar() {
       {/* menu móvel */}
       <div
         className={`
-          md:hidden bg-primary transition-max-height duration-300 overflow-hidden
+          md:hidden 
+          backdrop-blur-md bg-primary/80 
+          transition-max-height duration-300 overflow-hidden
           ${open ? 'max-h-72' : 'max-h-0'}
         `}
       >
