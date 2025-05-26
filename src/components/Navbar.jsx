@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-scroll'
 import { Menu, X } from 'lucide-react'
@@ -8,13 +7,13 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
   const links = [
-    { to: 'home',    label: 'Home' },
-    { to: 'about',   label: 'Sobre Nós' },
-    { to: 'services',label: 'Serviços' },
-    { to: 'tech',    label: 'Tecnologias' },
-    { to: 'cases',   label: 'Casos de Sucesso' },
-    { to: 'faq',     label: 'FAQ' },
-    { to: 'contact', label: 'Contato' }
+    { to: 'home',   label: 'Home' },
+    { to: 'about',  label: 'Sobre Nós' },
+    { to: 'services', label: 'Serviços' },
+    { to: 'tech',   label: 'Tecnologias' },
+    { to: 'cases',  label: 'Casos de Sucesso' },
+    { to: 'faq',    label: 'FAQ' },
+    { to: 'contact',label: 'Contato' },
   ]
 
   useEffect(() => {
@@ -27,11 +26,10 @@ export default function Navbar() {
     <nav
       className={`
         fixed top-0 w-full z-50 transition-shadow
-        ${scrolled
-          ? 'backdrop-blur-md bg-primary/80 shadow-md'
-          : 'backdrop-blur-md bg-primary/60'}
+        backdrop-blur-md ${scrolled ? 'bg-primary/80 shadow-md' : 'bg-primary/60'}
       `}
     >
+      {/* 1) Wrapper principal: sempre visível */}
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
         {/* logo */}
         <Link to="home" smooth duration={500} className="cursor-pointer">
@@ -52,7 +50,7 @@ export default function Navbar() {
                 smooth
                 offset={-80}
                 duration={500}
-                className="cursor-pointer px-2 py-1 text-white hover:text-secondary transition"
+                className="cursor-pointer text-white hover:text-secondary px-2 py-1 transition"
                 activeClass="text-secondary border-b-2 border-secondary"
               >
                 {label}
@@ -61,7 +59,7 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* burger button */}
+        {/* hambúrguer mobile */}
         <button
           className="md:hidden p-2 rounded hover:bg-white/10 transition"
           onClick={() => setOpen(o => !o)}
@@ -73,17 +71,11 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* mobile menu */}
-      <div
-        className={`
-          md:hidden backdrop-blur-md bg-primary/80
-          transition-max-height duration-300 overflow-hidden
-          ${open ? 'max-h-40' : 'max-h-0'}
-        `}
-      >
-        <ul className="flex flex-row overflow-x-auto px-4 py-3 space-x-4 scrollbar-none">
+      {/* 2) Menu móvel: colado no nav, mas separado */}
+      <div className={`${open ? 'block' : 'hidden'} md:hidden`}>
+        <ul className="flex flex-col px-4 pb-4 space-y-2">
           {links.map(({ to, label }) => (
-            <li key={to} className="flex-shrink-0">
+            <li key={to} className="w-full">
               <Link
                 to={to}
                 spy
@@ -91,7 +83,7 @@ export default function Navbar() {
                 offset={-80}
                 duration={500}
                 onClick={() => setOpen(false)}
-                className="block whitespace-nowrap px-3 py-2 text-white hover:text-secondary transition font-medium"
+                className="block w-full text-white hover:text-secondary px-3 py-2 transition font-medium"
                 activeClass="text-secondary"
               >
                 {label}
