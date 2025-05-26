@@ -4,24 +4,24 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const faqs = [
   {
-    question: 'Qual é o tipo de serviço da Nexus?',
+    question: 'Quais setores a Nexus Devsystem atende?',
     answer:
-      'Oferecemos desenvolvimento sob medida de aplicações web e mobile, otimização de processos legados, automação inteligente e integrações complexas.'
+      'Desenvolvemos soluções para indústrias, e-commerce, logística, saúde e serviços financeiros. Nossa abordagem customizada se adapta às particularidades de cada setor, garantindo resultados que elevam a eficiência e a competitividade do seu negócio.'
   },
   {
-    question: 'Por que contratar a Nexus e não outra software house?',
+    question: 'Como a Nexus garante a segurança das soluções?',
     answer:
-      'Porque não entregamos só código: construímos parcerias de longo prazo, entendendo a fundo seu negócio e garantindo soluções escaláveis e robustas.'
+      'Adotamos as melhores práticas de segurança da informação desde a concepção até a entrega: criptografia ponta a ponta, testes de vulnerabilidade regulares, controles de acesso e auditorias contínuas, assegurando total conformidade com padrões como ISO/IEC 27001 e LGPD.'
   },
   {
-    question: 'Qual é o diferencial da Nexus no desenvolvimento de software?',
+    question: 'Qual é o processo de desenvolvimento adotado?',
     answer:
-      'Nosso time usa metodologias ágeis, QA contínuo e as tecnologias mais avançadas para garantir performance, segurança e manutenibilidade.'
+      'Seguimos metodologias ágeis (Scrum/Kanban), com sprints curtos e entregas incrementais. Isso permite feedback constante, alinhamento com o produto e flexibilidade para ajustes em tempo real, reduzindo riscos e acelerando o time-to-market.'
   },
   {
-    question: 'Quais tipos de soluções a Nexus desenvolve?',
+    question: 'Como funciona o suporte e manutenção pós-implementação?',
     answer:
-      'De ERPs personalizados a pipelines de automação, chatbots e sistemas com Machine Learning – tudo alinhado às suas necessidades.'
+      'Oferecemos planos de suporte 24/7 com monitoramento proativo, SLAs definidos e equipe dedicada. Realizamos correções, atualizações e melhorias contínuas para manter seus sistemas sempre seguros, estáveis e alinhados às novas demandas do mercado.'
   }
 ]
 
@@ -35,7 +35,7 @@ export default function FAQ() {
       id="faq"
       className="relative overflow-hidden bg-cta-pattern bg-cover bg-center py-20"
     >
-      {/* blobs animados */}
+      {/* Blobs animados */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-accent/20 rounded-full filter blur-3xl animate-pulseSlow pointer-events-none" />
       <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-accent/10 rounded-full filter blur-2xl animate-pulseVerySlow pointer-events-none" />
 
@@ -44,15 +44,15 @@ export default function FAQ() {
           Perguntas Frequentes
         </h2>
 
-        {/* container do slider */}
+        {/* Slider */}
         <div className="relative h-[240px] md:h-[200px]">
-          {faqs.map(({ question, answer }, idx) => (
+          {faqs.map((faq, idx) => (
             <div
               key={idx}
               className={`
-                absolute inset-0
+                absolute inset-0 p-8
                 bg-secondary/30 backdrop-blur-md
-                p-8 rounded-2xl shadow-2xl border border-accent/20
+                rounded-2xl shadow-2xl border border-accent/20
                 transition-opacity duration-700 ease-in-out
                 ${idx === current
                   ? 'opacity-100'
@@ -60,32 +60,32 @@ export default function FAQ() {
               `}
             >
               <h3 className="text-2xl font-semibold text-accent mb-4">
-                {question}
+                {faq.question}
               </h3>
               <p className="text-accent/90 leading-relaxed">
-                {answer}
+                {faq.answer}
               </p>
             </div>
           ))}
 
-          {/* setas */}
+          {/* Controles */}
           <button
             onClick={prev}
             aria-label="Anterior"
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-secondary/50 hover:bg-secondary text-white p-2 rounded-full transition"
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-secondary/50 hover:bg-secondary text-white p-2 rounded-full transition"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={next}
             aria-label="Próximo"
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-secondary/50 hover:bg-secondary text-white p-2 rounded-full transition"
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-secondary/50 hover:bg-secondary text-white p-2 rounded-full transition"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
 
-        {/* indicadores */}
+        {/* Indicadores */}
         <div className="flex justify-center mt-8 space-x-2">
           {faqs.map((_, idx) => (
             <button
