@@ -6,22 +6,22 @@ const faqs = [
   {
     question: 'Quais setores a Nexus Devsystem atende?',
     answer:
-      'Desenvolvemos soluções para indústrias, e-commerce, logística, saúde e serviços financeiros. Nossa abordagem customizada adapta-se às particularidades de cada segmento, garantindo resultados que elevam a eficiência e a competitividade do seu negócio.'
+      'Desenvolvemos soluções para indústrias, e-commerce, logística, saúde e serviços financeiros. Nossa abordagem customizada adapta-se às particularidades de cada setor, garantindo resultados que elevam a eficiência e a competitividade do negócio.'
   },
   {
     question: 'Como a Nexus garante a segurança das soluções?',
     answer:
-      'Aplicamos criptografia ponta-a-ponta, testes contínuos de vulnerabilidade, controles de acesso granulares e auditorias regulares. Tudo em conformidade com ISO/IEC 27001 e LGPD, para você dormir tranquilo.'
+      'Aplicamos criptografia ponta-a-ponta, testes de vulnerabilidade contínuos, controles de acesso granulares e auditorias regulares, tudo em conformidade com ISO/IEC 27001 e LGPD.'
   },
   {
     question: 'Qual processo de desenvolvimento vocês seguem?',
     answer:
-      'Adotamos metodologias ágeis (Scrum/Kanban), com entregas incrementais, feedback constante e revisões em cada sprint. Isso nos dá agilidade para ajustar prioridades e acelerar seu time-to-market.'
+      'Usamos metodologias ágeis (Scrum/Kanban), com entregas incrementais e feedback constante para ajustar prioridades e acelerar o tempo de lançamento no mercado.'
   },
   {
     question: 'Como funciona o suporte pós-implementação?',
     answer:
-      'Oferecemos planos 24/7 com SLAs claros, monitoramento proativo e equipe dedicada. Garantimos correções, updates e evoluções contínuas para manter seu sistema sempre estável e seguro.'
+      'Oferecemos planos 24/7 com SLAs claros, monitoramento proativo e equipe dedicada para correções e evoluções contínuas do seu sistema.'
   }
 ]
 
@@ -47,19 +47,20 @@ export default function FAQ() {
           Perguntas Frequentes
         </h2>
 
-        {/* SLIDER WRAPPER: esconde tudo que passar das bordas */}
+        {/* Slider wrapper sem bordas */}
         <div className="relative overflow-hidden rounded-2xl">
           <div
             className="flex transition-transform duration-700 ease-in-out"
             style={{ transform: `translateX(-${current * 100}%)` }}
           >
             {faqs.map(({ question, answer }, idx) => (
-              <div key={idx} className="flex-shrink-0 w-full px-0 sm:px-4">
+              <div key={idx} className="flex-shrink-0 w-full px-4">
                 <div
                   className="
                     bg-secondary/30 backdrop-blur-md
-                    p-8 rounded-2xl shadow-2xl border border-accent/20
-                    transition-transform duration-300 ease-in-out hover:scale-105
+                    p-8 rounded-2xl shadow-2xl
+                    transform hover:scale-105
+                    transition duration-300
                   "
                 >
                   <h3 className="text-2xl font-semibold text-accent mb-4">
