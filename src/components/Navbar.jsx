@@ -7,12 +7,12 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
   const links = [
-    { to: 'home', label: 'Home' },
-    { to: 'about', label: 'Sobre Nós' },
-    { to: 'services', label: 'Serviços' },
-    { to: 'tech', label: 'Tecnologias' },
-    { to: 'cases', label: 'Casos de Sucesso' },
-    { to: 'faq', label: 'FAQ' },
+    { to: 'home',    label: 'Home' },
+    { to: 'about',   label: 'Sobre Nós' },
+    { to: 'services',label: 'Serviços' },
+    { to: 'tech',    label: 'Tecnologias' },
+    { to: 'cases',   label: 'Casos de Sucesso' },
+    { to: 'faq',     label: 'FAQ' },
     { to: 'contact', label: 'Contato' }  // ← Certifica-se de incluir Contato por último
   ]
 
@@ -35,16 +35,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
         {/* logo */}
         <Link to="home" smooth duration={500} className="cursor-pointer">
-          <img src="/nexuslogo.png" alt="Nexus Devsystem" className="h-10 md:h-12" />
+          <img src="/nexuslogo.png" alt="Nexus Devsystem" className="h-14 md:h-16 lg:h-20" />
         </Link>
-        <Link to="home" smooth duration={500} className="cursor-pointer">
-          <img
-            src="/nexuslogo.png"
-            alt="Nexus Devsystem"
-            className="h-14 md:h-16 lg:h-20"
-          />
-        </Link>
-
 
         {/* desktop links */}
         <ul className="hidden md:flex space-x-6">
