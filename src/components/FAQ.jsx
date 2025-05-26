@@ -27,42 +27,53 @@ const faqs = [
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null)
-
-  const toggle = (i) => {
-    setOpenIndex(openIndex === i ? null : i)
-  }
+  const toggle = (i) => setOpenIndex(openIndex === i ? null : i)
 
   return (
     <section id="faq" className="py-20 bg-primary text-accent">
       <div className="max-w-3xl mx-auto px-6">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
+        <h2 className="text-4xl font-bold text-center mb-12 animate-fadeIn">
           Perguntas frequentes
         </h2>
-        <div className="space-y-4">
-          {faqs.map((item, i) => (
-            <div
-              key={i}
-              className="border-b border-secondary/50 pb-4 last:border-none"
-            >
-              <button
-                onClick={() => toggle(i)}
-                className="w-full flex justify-between items-center text-left"
+        <div className="space-y-6">
+          {faqs.map((item, i) => {
+            const isOpen = i === openIndex
+            return (
+              <div
+                key={i}
+                className={`
+                  bg-secondary/10 rounded-lg overflow-hidden
+                  transform transition-shadow duration-300
+                  ${isOpen ? 'shadow-2xl' : 'shadow-lg hover:shadow-xl'}
+                `}
               >
-                <span className="font-semibold text-lg">
-                  {item.question}
-                </span>
-                <ChevronDown
-                  className={`w-6 h-6 text-secondary transition-transform duration-200
-                              ${openIndex === i ? 'rotate-180' : ''}`}
-                />
-              </button>
-              {openIndex === i && (
-                <p className="mt-3 text-accent/80 leading-relaxed">
-                  {item.answer}
-                </p>
-              )}
-            </div>
-          ))}
+                <button
+                  onClick={() => toggle(i)}
+                  className={`
+                    w-full flex justify-between items-center px-6 py-4
+                    focus:outline-none ${isOpen ? 'bg-secondary/20' : ''}
+                    transition-colors duration-200
+                  `}
+                >
+                  <span className="font-medium text-lg">{item.question}</span>
+                  <ChevronDown
+                    className={`
+                      w-6 h-6 text-secondary transition-transform duration-300
+                      ${isOpen ? 'rotate-180' : ''}
+                    `}
+                  />
+                </button>
+                <div
+                  className={`
+                    px-6 overflow-hidden transition-all duration-300
+                    ${isOpen ? 'max-h-40 py-4' : 'max-h-0'}
+                  `}
+                >
+                  <p className="text-accent/80 leading-relaxed">{item.answer}</p>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>
