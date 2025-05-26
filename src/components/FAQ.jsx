@@ -1,79 +1,103 @@
 // src/components/FAQ.jsx
 import React, { useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const faqs = [
   {
     question: 'Qual é o tipo de serviço da Nexus?',
     answer:
-      'Oferecemos desenvolvimento de sistemas sob medida, otimização de processos e automação inteligente para maximizar a eficiência do seu negócio.'
+      'Oferecemos desenvolvimento sob medida de sistemas web e mobile, otimização de processos legados, automação inteligente e integrações complexas.'
   },
   {
     question: 'Por que contratar a Nexus e não outra software house?',
     answer:
-      'Nossa abordagem é 100% colaborativa: mergulhamos nos desafios do cliente, usamos tecnologias de ponta e garantimos entregas no prazo com altíssima qualidade.'
+      'Focamos em parcerias de longo prazo, entendendo profundamente seu negócio e entregando soluções escaláveis, seguras e alinhadas aos seus objetivos estratégicos.'
   },
   {
     question: 'Qual é o diferencial da Nexus no quesito desenvolvimento de Software?',
     answer:
-      'Investimos em design escalável e manutenível, acompanhamos seus KPIs com monitoramento contínuo e evoluímos seu sistema conforme o crescimento da sua empresa.'
+      'Nosso time combina expertise em engenharia de software, metodologias ágeis e as tecnologias mais avançadas para garantir qualidade, performance e manutenibilidade.'
   },
   {
     question: 'Quais tipos de soluções a Nexus desenvolve?',
     answer:
-      'Criamos aplicações web e mobile, implantamos IA e Machine Learning, fazemos integrações de sistemas, arquiteturas em cloud e pipelines de automação.'
+      'Desde plataformas corporativas e ERPs personalizados até pipelines de automação,chatbots e sistemas com Machine Learning integrada.'
   }
 ]
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(null)
-  const toggle = (i) => setOpenIndex(openIndex === i ? null : i)
+  const [current, setCurrent] = useState(0)
+
+  const prev = () =>
+    setCurrent((i) => (i - 1 + faqs.length) % faqs.length)
+  const next = () =>
+    setCurrent((i) => (i + 1) % faqs.length)
 
   return (
     <section id="faq" className="py-20 bg-primary text-accent">
-      <div className="max-w-3xl mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-12 animate-fadeIn">
-          Perguntas frequentes
+      <div className="max-w-4xl mx-auto px-6 text-center">
+        <h2
+          className="text-3xl sm:text-4xl font-bold mb-12 animate-fadeIn"
+        >
+          Perguntas Frequentes
         </h2>
-        <div className="space-y-6">
-          {faqs.map((item, i) => {
-            const isOpen = i === openIndex
-            return (
+
+        <div className="relative overflow-hidden">
+          {/* Slides */}
+          <div
+            className="flex transition-transform duration-500 ease-out"
+            style={{
+              transform: `translateX(-${current * 100}%)`
+            }}
+          >
+            {faqs.map(({ question, answer }, idx) => (
               <div
-                key={i}
-                className={`
-                  bg-secondary/10 rounded-lg overflow-hidden
-                  transform transition-shadow duration-300
-                  ${isOpen ? 'shadow-2xl' : 'shadow-lg hover:shadow-xl'}
-                `}
+                key={idx}
+                className="flex-shrink-0 w-full px-6"
               >
-                <button
-                  onClick={() => toggle(i)}
-                  className={`
-                    w-full flex justify-between items-center px-6 py-4
-                    focus:outline-none ${isOpen ? 'bg-secondary/20' : ''}
-                    transition-colors duration-200
-                  `}
-                >
-                  <span className="font-medium text-lg">{item.question}</span>
-                  <ChevronDown
-                    className={`
-                      w-6 h-6 text-secondary transition-transform duration-300
-                      ${isOpen ? 'rotate-180' : ''}
-                    `}
-                  />
-                </button>
-                <div
-                  className={`
-                    px-6 overflow-hidden transition-all duration-300
-                    ${isOpen ? 'max-h-40 py-4' : 'max-h-0'}
-                  `}
-                >
-                  <p className="text-accent/80 leading-relaxed">{item.answer}</p>
+                <div className="bg-secondary/30 p-8 rounded-2xl shadow-lg">
+                  <h3 className="text-xl font-semibold mb-4">
+                    {question}
+                  </h3>
+                  <p className="text-accent/90 leading-relaxed">
+                    {answer}
+                  </p>
                 </div>
               </div>
-            )
-          })}
+            ))}
+          </div>
+
+          {/* Controles */}
+          <button
+            onClick={prev}
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-secondary/50 hover:bg-secondary text-white p-2 rounded-full transition"
+            aria-label="Anterior"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={next}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-secondary/50 hover:bg-secondary text-white p-2 rounded-full transition"
+            aria-label="Próximo"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Dots */}
+        <div className="flex justify-center mt-8 space-x-2">
+          {faqs.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrent(idx)}
+              className={`w-3 h-3 rounded-full transition-colors ${
+                idx === current
+                  ? 'bg-accent'
+                  : 'bg-accent/40 hover:bg-accent/70'
+              }`}
+              aria-label={`Slide ${idx + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>
