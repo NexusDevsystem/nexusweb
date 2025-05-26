@@ -13,6 +13,7 @@ export default function Navbar() {
     { to: 'services',label: 'Serviços' },
     { to: 'cases',   label: 'Casos de Sucesso' },
     { to: 'tech',    label: 'Tecnologias' },
+    { to: 'FAQ', label: 'FAQ' },
     { to: 'contact', label: 'Contato' }
   ]
 
