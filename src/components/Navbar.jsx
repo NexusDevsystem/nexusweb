@@ -1,7 +1,6 @@
 // src/components/Navbar.jsx
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-scroll'
-import { Menu, X } from 'lucide-react'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -17,7 +16,6 @@ export default function Navbar() {
     { to: 'contact', label: 'Contato' }
   ]
 
-  // adiciona sombra e blur na navbar ao dar scroll
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 0)
     window.addEventListener('scroll', onScroll)
@@ -30,7 +28,7 @@ export default function Navbar() {
         fixed top-0 w-full z-50 transition-shadow
         ${scrolled
           ? 'backdrop-blur-md bg-primary/80 shadow-md'
-          : 'bg-primary/60'}
+          : 'backdrop-blur-md bg-primary/60'}
       `}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
@@ -39,11 +37,11 @@ export default function Navbar() {
           <img
             src="/nexuslogo.png"
             alt="Nexus Devsystem"
-            className="h-12 md:h-14"
+            className="h-14 md:h-16 lg:h-20"
           />
         </Link>
 
-        {/* links desktop */}
+        {/* desktop links */}
         <ul className="hidden md:flex space-x-6">
           {links.map(({ to, label }) => (
             <li key={to}>
@@ -53,7 +51,7 @@ export default function Navbar() {
                 smooth
                 offset={-80}
                 duration={500}
-                className="cursor-pointer px-2 py-1 text-white hover:text-secondary transition-colors"
+                className="cursor-pointer px-2 py-1 text-white hover:text-secondary transition"
                 activeClass="text-secondary border-b-2 border-secondary"
               >
                 {label}
@@ -62,28 +60,38 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* toggle mobile */}
+        {/* botão mobile (2 barras → X) */}
         <button
-          className="md:hidden p-2 rounded hover:bg-primary/30 transition"
+          className="md:hidden flex flex-col items-center justify-center w-10 h-10 relative focus:outline-none"
           onClick={() => setOpen(o => !o)}
         >
-          {open
-            ? <X className="w-6 h-6 text-white" />
-            : <Menu className="w-6 h-6 text-white" />
-          }
+          {/* Linha superior */}
+          <span
+            className={`
+              block absolute h-0.5 w-6 bg-white transition-transform duration-300
+              ${open ? 'rotate-45' : '-translate-y-1.5'}
+            `}
+          />
+          {/* Linha inferior */}
+          <span
+            className={`
+              block absolute h-0.5 w-6 bg-white transition-transform duration-300
+              ${open ? '-rotate-45' : 'translate-y-1.5'}
+            `}
+          />
         </button>
       </div>
 
-      {/* menu móvel com fundo embaçado */}
+      {/* menu móvel */}
       <div
         className={`
-          md:hidden fixed top-16 inset-x-0 z-40
-          bg-primary/60 backdrop-blur-md
-          transition-[max-height] duration-300 overflow-hidden
-          ${open ? 'max-h-screen' : 'max-h-0'}
+          md:hidden
+          backdrop-blur-md bg-primary/60
+          transition-max-height duration-300 ease-in-out overflow-hidden
+          ${open ? 'max-h-72' : 'max-h-0'}
         `}
       >
-        <ul className="flex flex-col px-4 pt-4 pb-6 space-y-3">
+        <ul className="flex flex-col px-4 pb-4 space-y-2">
           {links.map(({ to, label }) => (
             <li key={to}>
               <Link
@@ -92,7 +100,7 @@ export default function Navbar() {
                 smooth
                 offset={-80}
                 duration={500}
-                className="block py-2 text-white hover:text-secondary transition-colors"
+                className="block py-2 text-white hover:text-secondary transition"
                 activeClass="text-secondary font-semibold"
                 onClick={() => setOpen(false)}
               >
