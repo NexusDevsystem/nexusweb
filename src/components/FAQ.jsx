@@ -35,24 +35,24 @@ export default function FAQ() {
       id="faq"
       className="relative overflow-hidden bg-cta-pattern bg-cover bg-center py-20"
     >
-      {/* Blobs animados */}
+      {/* blobs animados */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-accent/20 rounded-full filter blur-3xl animate-pulseSlow pointer-events-none" />
       <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-accent/10 rounded-full filter blur-2xl animate-pulseVerySlow pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
         <h2 className="text-4xl sm:text-5xl font-bold text-accent mb-12 animate-fadeIn">
           Perguntas Frequentes
         </h2>
 
-        {/* Slider */}
-        <div className="relative h-[240px] md:h-[200px]">
+        {/* slider wrapper com overflow oculto */}
+        <div className="relative overflow-x-hidden h-[240px] md:h-[200px]">
           {faqs.map((faq, idx) => (
             <div
               key={idx}
               className={`
-                absolute inset-0 p-8
+                absolute inset-0 px-4
                 bg-secondary/30 backdrop-blur-md
-                rounded-2xl shadow-2xl border border-accent/20
+                p-8 rounded-2xl shadow-2xl border border-accent/20
                 transition-opacity duration-700 ease-in-out
                 ${idx === current
                   ? 'opacity-100'
@@ -62,13 +62,13 @@ export default function FAQ() {
               <h3 className="text-2xl font-semibold text-accent mb-4">
                 {faq.question}
               </h3>
-              <p className="text-accent/90 leading-relaxed">
+              <p className="text-accent/90 leading-relaxed whitespace-normal break-words">
                 {faq.answer}
               </p>
             </div>
           ))}
 
-          {/* Controles */}
+          {/* controles */}
           <button
             onClick={prev}
             aria-label="Anterior"
@@ -85,7 +85,7 @@ export default function FAQ() {
           </button>
         </div>
 
-        {/* Indicadores */}
+        {/* indicadores de slides */}
         <div className="flex justify-center mt-8 space-x-2">
           {faqs.map((_, idx) => (
             <button
