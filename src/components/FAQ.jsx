@@ -36,39 +36,39 @@ export default function FAQ() {
       className="relative overflow-hidden bg-cta-pattern bg-cover bg-center py-20"
     >
       {/* blobs animados */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-accent/20 rounded-full filter blur-3xl animate-pulseSlow pointer-events-none"/>
-      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-accent/10 rounded-full filter blur-2xl animate-pulseVerySlow pointer-events-none"/>
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-accent/20 rounded-full filter blur-3xl animate-pulseSlow pointer-events-none" />
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-accent/10 rounded-full filter blur-2xl animate-pulseVerySlow pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-4xl sm:text-5xl font-bold text-accent mb-12 animate-fadeIn">
           Perguntas Frequentes
         </h2>
 
-        <div className="relative">
-          {/* CARROSSEL */}
-          <div
-            className="flex transition-transform duration-700 ease-in-out"
-            style={{ transform: `translateX(-${current * 100}%)` }}
-          >
-            {faqs.map(({ question, answer }, idx) => (
-              <div key={idx} className="flex-shrink-0 w-full px-4">
-                <div
-                  className="bg-secondary/30 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-accent/20 transition-transform hover:scale-105"
-                  // dispara o slideIn ao montar
-                  style={{ animation: 'slideIn 0.5s ease-out' }}
-                >
-                  <h3 className="text-2xl font-semibold text-accent mb-4">
-                    {question}
-                  </h3>
-                  <p className="text-accent/90 leading-relaxed">
-                    {answer}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* container do slider */}
+        <div className="relative h-[240px] md:h-[200px]">
+          {faqs.map(({ question, answer }, idx) => (
+            <div
+              key={idx}
+              className={`
+                absolute inset-0
+                bg-secondary/30 backdrop-blur-md
+                p-8 rounded-2xl shadow-2xl border border-accent/20
+                transition-opacity duration-700 ease-in-out
+                ${idx === current
+                  ? 'opacity-100'
+                  : 'opacity-0 pointer-events-none'}
+              `}
+            >
+              <h3 className="text-2xl font-semibold text-accent mb-4">
+                {question}
+              </h3>
+              <p className="text-accent/90 leading-relaxed">
+                {answer}
+              </p>
+            </div>
+          ))}
 
-          {/* SETAS */}
+          {/* setas */}
           <button
             onClick={prev}
             aria-label="Anterior"
@@ -85,7 +85,7 @@ export default function FAQ() {
           </button>
         </div>
 
-        {/* BOLINHAS */}
+        {/* indicadores */}
         <div className="flex justify-center mt-8 space-x-2">
           {faqs.map((_, idx) => (
             <button
