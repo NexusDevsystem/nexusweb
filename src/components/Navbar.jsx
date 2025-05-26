@@ -13,7 +13,7 @@ export default function Navbar() {
     { to: 'tech',    label: 'Tecnologias' },
     { to: 'cases',   label: 'Casos de Sucesso' },
     { to: 'faq',     label: 'FAQ' },
-    { to: 'contact', label: 'Contato' }
+    { to: 'contact', label: 'Contato' }  // ← Certifica-se de incluir Contato por último
   ]
 
   useEffect(() => {
@@ -26,7 +26,10 @@ export default function Navbar() {
     <nav
       className={`
         fixed top-0 w-full z-50 transition-shadow
-        ${scrolled ? 'backdrop-blur-md bg-primary/80 shadow-md' : 'bg-primary/60'}
+        ${scrolled
+          ? 'backdrop-blur-md bg-primary/80 shadow-md'
+          : 'backdrop-blur-md bg-primary/60'
+        }
       `}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
@@ -54,17 +57,19 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* botão mobile */}
+        {/* botão mobile (2 barras → X) */}
         <button
           className="md:hidden flex flex-col items-center justify-center w-10 h-10 relative focus:outline-none"
           onClick={() => setOpen(o => !o)}
         >
+          {/* Linha superior */}
           <span
             className={`
               block absolute h-0.5 w-6 bg-white transition-transform duration-300
               ${open ? 'rotate-45' : '-translate-y-1.5'}
             `}
           />
+          {/* Linha inferior */}
           <span
             className={`
               block absolute h-0.5 w-6 bg-white transition-transform duration-300
@@ -78,8 +83,8 @@ export default function Navbar() {
       <div
         className={`
           md:hidden 
-          backdrop-blur-md bg-primary/80 
-          transition-max-height duration-300 overflow-hidden
+          backdrop-blur-md bg-primary/60       /* ← mesmo blur + transparência leve */
+          transition-max-height duration-300 ease-in-out overflow-hidden
           ${open ? 'max-h-72' : 'max-h-0'}
         `}
       >
