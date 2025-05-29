@@ -2,16 +2,14 @@
 import React from 'react'
 import { ArrowRightLeft, Building, ShoppingBag } from 'lucide-react'
 import AnimateOnScroll from './AnimateOnScroll'
-import EstacioLogo from '../icons/estacio.png'
 
 const cases = [
   {
-    logo: EstacioLogo,
-    title: 'Coordena+ na Estácio',
-    desc:
-      'A Estácio adotou o sistema Coordena+, desenvolvido pela Nexus Devsystem, para gerenciar coordenações acadêmicas, integrações de turmas e relatórios em tempo real.',
-    result: '100% de adesão das coordenações e 50% de redução no tempo de geração de relatórios',
-    tag: 'Educação'
+    icon: ArrowRightLeft,
+    title: 'Automação Logística',
+    desc: 'Uma empresa de logística enfrentava desafios com o gerenciamento manual de rotas e rastreamento de entregas. Desenvolvemos um sistema integrado que automatizou todo o processo, desde o recebimento de pedidos até a confirmação de entrega.',
+    result: '40% de redução no tempo de entrega',
+    tag: 'Logística'
   },
   {
     icon: Building,
