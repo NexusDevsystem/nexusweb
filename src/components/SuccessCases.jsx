@@ -5,12 +5,11 @@ import AnimateOnScroll from './AnimateOnScroll'
 
 const cases = [
   {
-    icon: PlusCircle,
-    title: 'Coordena+ na Estácio',
-    desc:
-      'A Estácio adotou o sistema Coordena+, desenvolvido pela Nexus Devsystem, Plataforma para otimizar o uso de salas, laboratórios e recursos institucionais, reunindo agendamentos e disponibilidades em um calendário interativo. Professores e colaboradores marcam horários de forma rápida, enquanto a equipe de TI valida solicitações e monitora ocupação em tempo real. Oferece painel administrativo, tabela dinâmica de ocupação, sincronização com calendário e interface responsiva, simplificando processos manuais, reduzindo conflitos e aumentando a transparência na gestão acadêmica.',
-    result: '100% de adesão das coordenações e redução de 50% no tempo de geração de relatórios',
-    tag: 'Educação'
+    icon: ArrowRightLeft,
+    title: 'Automação Logística',
+    desc: 'Uma empresa de logística enfrentava desafios com o gerenciamento manual de rotas e rastreamento de entregas. Desenvolvemos um sistema integrado que automatizou todo o processo, desde o recebimento de pedidos até a confirmação de entrega.',
+    result: '40% de redução no tempo de entrega',
+    tag: 'Logística'
   },
   {
     icon: Building,
